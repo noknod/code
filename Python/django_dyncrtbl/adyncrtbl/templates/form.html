@@ -1,0 +1,59 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+
+<html lang="ru">
+
+<head>
+   <meta charset="utf-8">
+   <title>Тестовое задание</title>
+   <link rel="stylesheet" href="{% static "dyncrtbl/style.css" %}">
+   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+   <script type="text/javascript" src="{% static "dyncrtbl/script.js" %}"></script>
+</head>
+
+<body onload="init();">
+
+  <header><h1>Создание таблицы</h1></header>
+
+  <p class="wait" hidden>Пожалуйтса, подождите, идёт создание таблицы</p>
+
+  <main class="main">
+      <header><h2 hidden>Main section</h2></header>
+
+      <form class="table" action="" onsubmit="try {submitDo();} finally {return false;}">
+        {% csrf_token %}
+
+        <div class="name">
+          <fieldset class="name">
+            <label for="name">Наименование</label>
+            <input type="text" class="name" id="name" pattern="^[a-zA-Z]{1,30}$" placeholder="Только латинские буквы до 30 символов" 
+                required autofocus name="table"/>
+          </fieldset>
+        </div>
+
+        <br>
+
+        <div class="fields" id="fields">
+        </div>
+
+        <br>
+
+        <button type="submit" class="submitDo">Отправить</button>
+      </form>
+
+      <br>
+
+      <ul class="add">
+        <li><button class="addInteger" onclick="createField(0);">Добавить IntegerField</button></li>
+        <li><button class="addChar" onclick="createField(1);">Добавить CharField</button></li>
+        <li><button class="addText" onclick="createField(2);">Добавить TextField</button></li>
+      </ul>
+  </main>
+
+    <footer>
+        <p>Клюшкин Ю. А. 2015</p>
+    </footer>
+
+</body>
+</html>

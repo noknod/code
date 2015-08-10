@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <project basedir="." default="make">
+        <property name="build.dir" value="build" />
+        <property name="src.dir" value="src" />
+        <property name="dist.dir" value="dist" />
+
+        <target description="Creates temporary directories" name="init">
+            <mkdir dir="${build.dir}/classes" />
+            <mkdir dir="${dist.dir}" />
+        </target>
+
+        <target depends="init" description="Removes temporary directories" name="clean">
+            <delete dir="${build.dir}" />
+            <delete dir="bin" failonerror="false" />
+            <delete dir="${dist.dir}" failonerror="false" />
+        </target>
+
+        <target name="compile" depends="init">
+            <javac debug="true" deprecation="true"
+                destdir="${build.dir}/classes" srcdir="${src.dir}"
+                verbose="true" />
+        </target>
+
+        <target name="makecommon" depends="compile">
+            <jar destfile="${dist.dir}/lib/common.jar"
+            	basedir="${build.dir}/classes"
+            	excludes="**/Test.class, **/kya/, **/ru/mail/noxnod/job/" />
+        </target>
+
+        <target name="makejob" depends="compile">
+            <jar destfile="${dist.dir}/lib/job.jar"
+            	basedir="${build.dir}/classes"
+            	excludes="**/Test.class, **/kya/, **/ru/mail/noxnod/common/" />
+        </target>
+
+        <target name="make" depends="makecommon, makejob">
+            <jar destfile="${dist.dir}/download.jar">
+                <fileset dir="${dist.dir}/lib" />
+            	<fileset dir="${build.dir}/classes"
+                     excludes="**/ru/" />
+                <restrict>
+                 <name name="**/*.class"/>
+                 <archives>
+                   <zips>
+                     <fileset dir="${dist.dir}/lib" includes="**/*.jar"/>
+                   </zips>
+                 </archives>
+                </restrict>
+            	<manifest>
+                  <attribute name="Main-Class"
+                        value="Test"/>
+                </manifest>
+             </jar>
+        </target>
+
+    </project>

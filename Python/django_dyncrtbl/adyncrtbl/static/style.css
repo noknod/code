@@ -1,0 +1,35 @@
+fieldset {
+    padding: 10px;
+    border-radius: 10px;
+}
+
+label {
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+input {
+    float: right;
+    margin-right: 70px;
+    width: 200px;
+}
+
+input:invalid {
+    background-color: pink;
+}
+
+.length {
+    width: 50px;
+}
+
+fieldset.name {
+    width: 350px;
+}
+
+.field {
+    width: 350px;
+}
+
+footer {
+    vertical-align: bottom;
+}

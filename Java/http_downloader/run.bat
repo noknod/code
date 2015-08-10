@@ -1,0 +1,1 @@
+java -jar .\prog\dist\download.jar -n 5  -l 10000k -o "%~dp0out\\" -f "%~dp0test.txt" -ml "%~dp0out\out.txt" -me "%~dp0out\err.txt" 

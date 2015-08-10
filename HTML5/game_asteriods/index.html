@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+
+<head>
+   <meta charset="utf-8">
+   <title>Androids</title>
+    <link rel="stylesheet" href="style.css">
+   <script src="init.js"></script>
+   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+</head>
+
+<body onload="init()">
+
+    <header>
+        <h1 hidden>Androids</h1>
+    </header>
+
+    <main>
+        <header><h2 hidden>Main section</h2></header>
+            <p><br>
+               Left/Right arrow - rotate
+               <br>
+                Up arrow - thrust
+               <br>
+               <div id="warning_canvas_not_focus"><em>CANVAS IS NOT IN FOCUS!</em></div>
+            </p>
+            <p>
+                <canvas id="vcanvas" width=800 height=600 tabindex="1" 
+                        onblur="$('#warning_canvas_not_focus').show();" onfocus="$('#warning_canvas_not_focus').hide();">
+                    Canvas is not supported in your browser
+                </canvas>
+            </p>
+    </main>
+
+    <footer>
+        <p>2015 Клюшкин Ю. А.</p>
+    </footer>
+
+</body>
+</html>
