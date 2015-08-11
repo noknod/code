@@ -14,5 +14,17 @@ DB_TABLE_PREFIX = 'lpforms.public.'
 
 ADMIN_DOMAINFORM_EXTRA = 3
 
-DB_USES = 'SQLite'
-#DB_USES = 'PostgreSQL'
+
+from django.conf import settings
+
+DB_POSTGRESQL, DB_SQLITE = ('postgresql_psycopg2', 'sqlite3')
+DB_USING = settings.DATABASES['default']['ENGINE'].lower().split('.')[-1]
+
+VALUE_SIMPLE_SHOWLEN = 25
+
+
+FIELD_TYPES = (
+    ('IR', 'Integer'),
+    ('CR', 'Char'),
+    ('TT', 'Text'),
+)

@@ -6,7 +6,7 @@ from django.contrib import admin
 
 # Register your models here.
 
-from .models import Domain, DomainForm
+from .models import Domain, DomainForm, FormSimple, FormText
 from .consts import ADMIN_DOMAINFORM_EXTRA
 
 
@@ -42,5 +42,25 @@ class DomainFormAdmin(admin.ModelAdmin):
 
 
 
+class FormSimpleAdmin(admin.ModelAdmin):
+    """ Представление таблицы простых значений форм при администрировании  """
+
+    list_display = ('read_domain', 'message_id', 'read_field', 'fvalue')
+
+    list_filter = ['field_id']
+
+
+
+class FormTextAdmin(admin.ModelAdmin):
+    """ Представление таблицы полного текста форм при администрировании  """
+
+    list_display = ('read_domain', 'message_id', 'read_field', 'fvalue')
+
+    list_filter = ['field_id']
+
+
+
 admin.site.register(Domain, DomainAdmin)
 admin.site.register(DomainForm, DomainFormAdmin)
+admin.site.register(FormSimple, FormSimpleAdmin)
+admin.site.register(FormText, FormTextAdmin)

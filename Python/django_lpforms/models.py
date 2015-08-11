@@ -12,7 +12,6 @@ from django.utils.translation import ugettext as _
 # Create your models here.
 
 from .consts import * 
-from .utils import get_nextval_from_sequence_ps, get_nextval_from_sequence_sl
 
 
 #def validate_domen(value):
@@ -66,11 +65,13 @@ class DomainForm(models.Model):
                              help_text='', )
 
     # поле: Тип поля
+    #"""
     FIELD_TYPES = (
         ('IR', 'Integer'),
         ('CR', 'Char'),
         ('TT', 'Text'),
     )
+    #"""
     ftype = models.CharField(max_length=2,  
                              null=False, 
                              choices=FIELD_TYPES, 
@@ -139,6 +140,110 @@ class DomainForm(models.Model):
 
 
 
+class FormSimple(models.Model):
+    """ Таблица для хранения значений формы простого типа (Integer, Char) """
+
+    class Meta:
+        verbose_name = 'Значения формы простого типа (Integer, Char)'
+        ordering = ['message_id', 'field_id']
+        unique_together = (('message_id', 'field_id',),)
+
+    # поле: Ключ определения соответствующего сообщения 
+    message_id = models.IntegerField(null=False, 
+                             blank=True, 
+                             verbose_name='Ключ сообщения', 
+                             help_text='', )
+
+    # поле: Поле формы
+    field_id = models.ForeignKey(DomainForm, 
+                             null=False, 
+                             #blank=False,
+                             verbose_name='Поле формы', 
+                             help_text='', )
+
+    # поле: Значение, введённое пользователем
+    fvalue = models.CharField(max_length=FIELD_CHAR_MAXLENGTH, 
+                             null=True, 
+                             blank=True, 
+                             verbose_name='Значение, введённое пользователем', 
+                             help_text='', )
+
+    def read_domain(self):
+        """ Возвращает доменное имя """
+        return self.field_id.read_domain()
+    #read_domain.admin_order_field = 'domain'
+    read_domain.short_description = 'Доменное имя'
+
+    def read_field(self):
+        """ Возвращает поле формы """
+        return self.field_id.fname
+    #read_domain.admin_order_field = 'domain'
+    read_field.short_description = 'Поле формы'
+
+    def __str__(self):
+        return str(self.field_id) + ': ' + self.fvalue[:VALUE_SIMPLE_SHOWLEN]
+
+
+
+class FormText(models.Model):
+    """ Таблица для хранения значений формы полного текста (Text) """
+
+    class Meta:
+        verbose_name = 'Значения формы полного текста (Text)'
+        ordering = ['message_id', 'field_id']
+        unique_together = (('message_id', 'field_id',),)
+
+    # поле: Ключ определения соответствующего сообщения 
+    message_id = models.IntegerField(null=False, 
+                             blank=True, 
+                             verbose_name='Ключ сообщения', 
+                             help_text='', )
+
+    # поле: Поле формы
+    field_id = models.ForeignKey(DomainForm, 
+                             null=False, 
+                             #blank=False,
+                             verbose_name='Поле формы', 
+                             help_text='', )
+
+    # поле: Значение, введённое пользователем
+    fvalue = models.CharField(max_length=FIELD_CHAR_MAXLENGTH, 
+                             null=True, 
+                             blank=True, 
+                             verbose_name='Значение, введённое пользователем', 
+                             help_text='', )
+
+    def read_domain(self):
+        """ Возвращает доменное имя """
+        return self.field_id.read_domain()
+    #read_domain.admin_order_field = 'domain'
+    read_domain.short_description = 'Доменное имя'
+
+    def read_field(self):
+        """ Возвращает поле формы """
+        return self.field_id.fname
+    #read_domain.admin_order_field = 'domain'
+    read_field.short_description = 'Поле формы'
+
+    def __str__(self):
+        return str(self.field_id) + ': ' + self.fvalue[:VALUE_SIMPLE_SHOWLEN]
+
+
+
+if DB_USING == DB_SQLITE:
+    class FormPostSeq(models.Model):
+        """
+        Класс для аналога последовательности (sequence) из PostgreSQL.
+        form_post_seq - уникальный ключ совокупности значений полей 
+        заполненной одной формы
+        """
+        #sequence_name = models.IntegerField(primary_key=True)
+        nextval = models.IntegerField(default=0)
+
+        class Meta:
+            db_table = u'form_post_seq'
+elif DB_USING == DB_POSTGRESQL:
+    pass
 #class FormPostSeq(models.Model):
 #    """
 #    Класс соотноситя с последовательностью (sequence) из PostgreSQL.
@@ -157,17 +262,3 @@ class DomainForm(models.Model):
 
 #    class Meta:
 #        db_table = u'form_post_seq'
-
-
-if DB_USES == 'SQLite':
-    class FormPostSeq(models.Model):
-        """
-        Класс для аналога последовательности (sequence) из PostgreSQL.
-        form_post_seq - уникальный ключ совокупности значений полей 
-        заполненной одной формы
-        """
-        #sequence_name = models.IntegerField(primary_key=True)
-        nextval = models.IntegerField(default=0)
-
-        class Meta:
-            db_table = u'form_post_seq'
