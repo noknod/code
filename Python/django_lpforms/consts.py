@@ -28,3 +28,15 @@ FIELD_TYPES = (
     ('CR', 'Char'),
     ('TT', 'Text'),
 )
+
+
+VALUE_TEMPLATE_MAXLENGTH = 255
+
+
+from os import path
+
+TEMPLATE_DIR = path.join(path.dirname(path.realpath(__file__)), 'templates')
+TEMPLATE_FILE = 'lpform.html'
+
+SQL_SEARCH_DOMAIN = 'domain_id in (select itd.id from lpforms_domain itd ' + \
+                    'where itd.domain like %s)'

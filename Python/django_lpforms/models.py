@@ -5,8 +5,10 @@ from django.db import models
 
 from django.core.exceptions import ValidationError
 from django.core.validators import RegexValidator
-from django.utils.translation import ugettext as _
+#from django.utils.translation import ugettext as _
 
+
+import os
 
 
 # Create your models here.
@@ -38,6 +40,30 @@ class Domain(models.Model):
                              #validators=[validate_domen])
                              validators=[RegexValidator(regex=RE_VALID_DOMAIN, 
                                       message='Неверно указано доменное имя!')])
+
+    # поле: Папка/файл с шаблоном
+    template = models.CharField(max_length=VALUE_TEMPLATE_MAXLENGTH, 
+                             null=False, 
+                             unique=True, 
+                             verbose_name='Папка/файл с шаблоном', 
+                             help_text='', 
+                             db_index=True
+                             #validators=[validate_template])
+                            )
+
+    def read_template(self):
+        """ Возвращает путь до файла с шаблоном с проверкой на существование """
+        template = os.path.join(TEMPLATE_DIR, self.template)
+        if os.path.exists(template):
+            if os.path.isdir(template):
+                template = os.path.join(template, TEMPLATE_FILE)
+                if not os.path.exists(template):
+                    template = '*НЕ НАЙДЕН!*: ' + template
+        else:
+            template = '*НЕ НАЙДЕН!*: ' + template
+        return template
+    read_template.admin_order_field = 'template'
+    read_template.short_description = 'Папка/файл с шаблоном'
 
 #    def clean(self):
 #        print('\n***', get_nextval_from_sequence_sl(FormPostSeq), '\n')
