@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= blocks.title %></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.min.css" />
+</head>
+
+<body>
+    <header>
+        <%= blocks.header %>
+    </header>
+
+    <section class="container">
+
+    <%- partial('../partials/topNavigation') %>
+
+    <%- body -%>
+
+    </section>
+
+    <footer>
+        <%= blocks.footer %>
+    </footer>
+
+
+    <script type="text/javascript" src="/vendor/jquery/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>
