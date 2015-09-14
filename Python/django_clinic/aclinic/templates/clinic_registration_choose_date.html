@@ -1,0 +1,27 @@
+{% extends "clinic_main_template.html" %}
+
+{% block title %}: выбор даты приёма{% endblock %}
+
+{% block header %}Выбор даты приёма{% endblock %}
+
+{% block content %}
+        <p class="lead">
+            {% if speciality %}
+                Специальность: {{ speciality }}<br />
+            {% endif %}
+        </p>
+
+        <form action="/clinic/registration/date/" method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="OK">
+        </form>
+
+        <form action="/clinic/registration/date/" method="POST">
+            {% csrf_token %}
+            <input type="text" name="_method" value="DELETE" hidden>
+            <input type="submit" value="Отмена">
+        </form>
+{% endblock %}
+
+{% block footer %}Клюшкин Ю. А. 2015{% endblock %}

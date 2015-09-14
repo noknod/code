@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Приём в поликлинику{% block title %}{% endblock %}</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <link rel="stylesheet" href="/static/clinic/clinic_main_template.css" />
+    <link rel="stylesheet" href="/static/vendor/bootstrap/css/bootstrap.min.css" />
+</head>
+
+<body>
+
+    <main id="main" class="group" role="main">
+
+        <header class="banner" role="banner">
+            <h2>{% block header %}{% endblock %}</h2>
+        </header>
+
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="container-fluid">
+
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/clinic/">Главная</a>
+                </div>
+
+                <div class="collapse navbar-collapse" id="navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right" role="menu">
+                        {% if user.is_authenticated %}
+                            <li><a href="/clinic/logout/">{{ user }} / Выйти</a></li>
+                        {% else %}
+                            <li><a href="/clinic/login/">Войти</a><span class="sr-only">current</span></li>
+                            <li><a href="/clinic/login/">Регистрация</a><span class="sr-only">current</span></li>
+                        {% endif %}
+                    </ul>
+                </div>
+        </nav>
+
+        <div class="container">
+
+            {% block content %}{% endblock %}
+
+        </div>
+    </main>
+
+    <footer >
+        {% block footer %}{% endblock %}
+    </footer>
+
+    <script src="/static/vendor/jquery/jquery-1.11.3.min.js"></script>
+    <script src="/static/vendor/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>

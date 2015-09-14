@@ -1,0 +1,21 @@
+{% extends "clinic_main_template.html" %}
+
+{% block title %}: выбор специальности{% endblock %}
+
+{% block header %}Выбор специальности{% endblock %}
+
+{% block content %}
+        <form action="/clinic/registration/speciality/" method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="OK">
+        </form>
+
+        <form action="/clinic/registration/speciality/" method="POST">
+            {% csrf_token %}
+            <input type="text" name="_method" value="DELETE" hidden>
+            <input type="submit" value="Отмена">
+        </form>
+{% endblock %}
+
+{% block footer %}Клюшкин Ю. А. 2015{% endblock %}

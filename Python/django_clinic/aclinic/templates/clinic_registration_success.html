@@ -1,0 +1,21 @@
+{% extends "clinic_main_template.html" %}
+
+{% block title %}: подтверждение{% endblock %}
+
+{% block header %}Талон на приём{% endblock %}
+
+{% block content %}
+        {% if coupon %}
+            <p class="lead">
+                Номер талона: {{ coupon.reg_num }}<br />
+                Дата приёма: {{ coupon.vdate }}<br />
+                Час приёма: {{ coupon.hour }}<br />
+                Данные пациента: {{ coupon.client }}<br />
+                Доктор: {{ coupon.doctor }}
+            </p>
+        {% endif %}
+
+        <div class="div_href"><a href="/clinic/">Вернуться на главную страницу</a></div>
+{% endblock %}
+
+{% block footer %}Клюшкин Ю. А. 2015{% endblock %}

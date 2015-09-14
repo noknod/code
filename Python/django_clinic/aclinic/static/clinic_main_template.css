@@ -1,0 +1,63 @@
+html, body {
+    margin:0;
+    padding:0;
+    height:100%; /* needed for container min-height */
+    background-color:white;
+    
+    font-family:arial, sans-serif;
+    font-size:small;
+}
+
+
+header.banner {
+    background-color:red;
+    color:white;
+    clear:both;
+    text-align:center;
+    padding:5px;
+}
+header.banner > h2 {
+    font-family:verdana;
+    font-style:italic;
+}
+
+
+#main {
+    position: relative; /* needed for footer positioning*/
+    margin: 0 auto; /* center, not in IE5 */
+    width: 100%;
+    height:auto !important; /* real browsers */
+    height:100%; /* IE6: treaded as min-height*/
+
+    min-height:100%; /* real browsers */
+
+    margin: 0 auto -35px;
+}
+
+div.container {
+    padding:1em 1em 5em; /* bottom padding for footer */
+}
+    div#content p {
+        text-align:justify;
+        padding:0 1em;
+    }
+div.container > .div_href {
+    text-align:center;
+    color: green;
+}
+div.container > .div_href > a:link, a:visited, a:hover, a:active {
+    color: green;
+    font-size: 1.875em;
+}
+
+
+footer {
+    background-color:red;
+    color:white;
+    clear:both;
+    text-align:center;
+    padding:5px;
+    height:35px;
+    width:100%;
+    position:absolute;
+}
