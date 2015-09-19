@@ -1,0 +1,13 @@
+{
+    "connection": {
+        "host": "localhost", 
+        "port": 27017,
+        "user": "",
+        "password": "",
+        "authentication_mechanism": "SCRAM-SHA-1",
+        "database": "realty"
+    },
+    "defaults": {
+        "limit": {"records": 10, "pages": 0}
+    } 
+}
