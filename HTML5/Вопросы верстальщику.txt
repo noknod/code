@@ -1,0 +1,269 @@
+Вопрос 1: какой стиль текста будет в элементе <div><span>Test</span></div>?
+div span { text-decoration: underline; } span { text-decoration: none; }
+
+Варианты ответа:
+ подчеркнутый
+ обычный
+ жирный
+
+Ответ: подчеркнутый
+
+- - -
+
+Вопрос 2: сделать текст красным в последнем элементе списка
+<ul><li>Элемент 1</li><li>Элемент 2</li><li>Элемент 3</li></ul>
+
+Ответ:
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+    <title>Вопрос 10</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <style>
+        div:before {
+            content: '';
+            display: inline-block;
+            height: 100%;
+            vertical-align: middle;
+        }
+
+        div {
+            width: 100%;
+            border: 1px solid red;
+        }
+
+        span {
+            display: inline-block;
+            border:1px solid black;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+
+    <div style="height: 200px">
+        <span>Text</span>
+    </div>
+
+</body>
+</html>
+
+- - -
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+    <title>Вопрос 2 (вариант с JS)</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <style type="text/css">
+        div span { text-decoration: underline; }
+        span { text-decoration: none; }
+    </style>
+</head>
+<body onload="doOnPageLoad()">
+
+    <ul>
+        <li>Элемент 1</li>
+        <li>Элемент 2</li>
+        <li>Элемент 3</li>
+    </ul>
+
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.4.min.js"></script>
+    <script>
+        var list = null;
+
+        // Порядковый номер элемента, который следует закрасить
+        var numRed = 3;
+
+        function doOnPageLoad() {
+            list = $('ul');
+
+            $(list.children().get(numRed - 1)).attr('style', 'color: red');
+        };
+    </script>
+</body>
+</html>
+
+- - -
+
+Вопрос 3: Для чего используется twitter bootstrap
+
+Ответ: Данный набор CSS-шаблонов и JS-функций используется для 
+отображения и управления поведением содержимого на странице.
+
+- - -
+
+Вопрос 4: селектор #test обозначает
+
+Варианты ответа:
+  элементы с id = test
+  элементы с class = test
+  элементы с data = test
+
+Ответ: элементы с id = test
+
+- - -
+
+Вопрос 5: максимальный приоритет правила достигается с помощью 
+
+Варианты ответа:
+  important
+  !important
+  z-index:999
+  Другое: 
+
+Ответ: Другое: стиля пользователей с указанием !important
+
+- - -
+
+Вопрос 6: символ ">" в css обозначает
+напр., .my-div > a { ... }
+
+Варианты ответа:
+ правила для потомков элемента
+ правила для предков элемента
+ правила для прямых потомков элемента
+ Другое: 
+
+Ответ: правила для прямых потомков элемента
+
+- - -
+
+Вопрос 7: для элемента меню изменять текст на красный при наведении мыши
+<div class="menu"><a href="#">меню</a></div>
+
+Ответ:
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+    <title>Вопрос 7</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <style>
+        a:hover { color: #f00000; }
+  </style>
+</head>
+<body>
+
+    <div class="menu"><a href="#">меню</a></div>
+
+</body>
+</html>
+
+- - -
+
+Вопрос 8: отличие margin от padding
+
+Ответ: 
+- margin (поля): расстояние от границы элемента до внутренней границы его 
+родительского элемента или окна браузера;
+- padding (отступы) - внутреннее расстояние между границей и содержимым элемента.
+
+- - -
+
+Вопрос 9: 3 колонки высотой 200px, слева и справа: зеленые по 10% шириной, 
+посередине - желтую
+
+Ответ:
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+    <title>Вопрос 9</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <style>
+        .container {
+            width: 100%; 
+            height: 200px;
+            border: 1px solid red;
+            padding-bottom: 2px;
+        }
+
+        .column {
+            display: inline-block;
+            float: left;
+            width: 10%;
+            height: 100%;
+            border: 1px solid black;
+            background-color: green;
+        }
+
+        #second {
+            width: 80%;
+            margin-right: -6px;
+            background-color: yellow;
+        }
+
+        .clear {
+            clear: both;
+        }
+
+  </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="column" id="first"></div>
+        <div class="column" id="second"></div>
+        <div class="column" id="third"></div>
+        <div class="clear"></div>
+    </div>
+
+</body>
+</html>
+
+- - -
+
+Вопрос 10: Отцентрировать span вертикально в рамках div
+<div style="height: 200px"><span>Text</span></div>
+
+Ответ:
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+    <title>Вопрос 10</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <style>
+        div:before {
+            content: '';
+            display: inline-block;
+            height: 100%;
+            vertical-align: middle;
+        }
+
+        div {
+            width: 100%;
+            border: 1px solid red;
+        }
+
+        span {
+            display: inline-block;
+            border:1px solid black;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+
+    <div style="height: 200px">
+        <span>Text</span>
+    </div>
+
+</body>
+</html>
+
+- - -
+
+Вопрос 11: что выбирается селектором .menu ul li:last-child:not([data-type^=item])
+
+
+Ответ: 
+1. .menu - класс menu,
+2. .menu ul - все ul-элементы внутри него,
+3. .menu ul li - все li-элементы внутри каждого из ul-'элемента класса menu,
+4. .menu ul li:last-child - только последние li-элементы (внутри каждого из ul-'элемента класса menu) в массиве элементов относительно своего родителя,
+5. из пункта 4 остаются только те элементы, у которых или отсутствует атрибут data-type, или его значение не начинается с 'item'.
+
+- - -
